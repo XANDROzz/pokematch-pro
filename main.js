@@ -10,6 +10,22 @@ let secondCard = null;
 let secondsElapsed = 0;
 let timerInterval = null;
 
+// Array base con 6 parejas de Pokémon (12 elementos en total)
+const pokemonList = [
+  "pikachu",
+  "pikachu",
+  "charmander",
+  "charmander",
+  "bulbasaur",
+  "bulbasaur",
+  "squirtle",
+  "squirtle",
+  "jigglypuff",
+  "jigglypuff",
+  "snorlax",
+  "snorlax",
+];
+
 const movesElement = document.getElementById("moves-count");
 const pairsElement = document.getElementById("pairs-count");
 
@@ -32,5 +48,27 @@ function stopConsoleTimer() {
   console.log(`⏹️ Temporizador detenido a los ${secondsElapsed} segundos.`);
 }
 
+/**
+ * Algoritmo de barajado Fisher-Yates
+ * @param {Array} array - Array de elementos a desordenar
+ * @returns {Array} El mismo array mezclado aleatoriamente
+ */
+function shuffleCards(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    // Generar índice aleatorio entre 0 e i
+    const j = Math.floor(Math.random() * (i + 1));
+
+    // Intercambiar elementos usando desestructuración
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 startConsoleTimer();
 updateBoardUI();
+
+console.log("Array original:", [...pokemonList]);
+
+const shuffledPokemon = shuffleCards(pokemonList);
+
+console.log("Array barajado (Fisher-Yates):", shuffledPokemon);
